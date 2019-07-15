@@ -10,6 +10,7 @@ uniform int uv_simulationtimeDays;
 uniform float uv_simulationtimeSeconds;
 
 uniform float userPsize;
+uniform float userScale;
 uniform vec3 galaxyColor;
 
 out vec2 texcoord;
@@ -55,7 +56,7 @@ void main()
 
 	color = galaxyColor;
 	
-	vec4 pos = vec4(gl_in[0].gl_Position.x, gl_in[0].gl_Position.y, gl_in[0].gl_Position.z, 1.);
+	vec4 pos = vec4(gl_in[0].gl_Position.x*userScale, gl_in[0].gl_Position.y*userScale, gl_in[0].gl_Position.z*userScale, 1.);
 	drawSprite(pos, userPsize, 0);
 
 }
