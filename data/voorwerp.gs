@@ -57,7 +57,7 @@ void drawSprite(vec4 position, float radius, float rotation)
 void main()
 {
 
-	color = vec3(gl_in[1].gl_Position.x, gl_in[1].gl_Position.y, gl_in[1].gl_Position.z);
+	color = vec3(gl_in[1].gl_Position.x/255., gl_in[1].gl_Position.y/255., gl_in[1].gl_Position.z/255.);
 
 
 	vec3 pos = vec3(gl_in[0].gl_Position.x*userScale + voorwerpOffset.x, gl_in[0].gl_Position.y*userScale + voorwerpOffset.y, gl_in[0].gl_Position.z*userScale + voorwerpOffset.z);
