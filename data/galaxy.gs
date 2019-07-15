@@ -11,7 +11,9 @@ uniform float uv_simulationtimeSeconds;
 
 uniform float userPsize;
 uniform float userScale;
-uniform float userRotation;
+uniform float userRotationX;
+uniform float userRotationY;
+uniform float userRotationZ;
 uniform vec3 galaxyColor;
 
 out vec2 texcoord;
@@ -58,7 +60,8 @@ void main()
 	color = galaxyColor;
 	
 	vec4 pos = vec4(gl_in[0].gl_Position.x*userScale, gl_in[0].gl_Position.y*userScale, gl_in[0].gl_Position.z*userScale, 1.);
-	vec3 axis = vec3(1,0,0);
-	mat3 rot = rotationMatrix(axis,userRotation);
-	drawSprite(rot*pos, userPsize, 0);
+	mat3 rotX= rotationMatrix(vec3(1,0,0), userRotationX);
+	mat3 rotY= rotationMatrix(vec3(0,1,0), userRotationY);
+	mat3 rotZ= rotationMatrix(vec3(0,0,1), userRotationZ);
+	drawSprite(rotX*rotY*rotZ*pos, userPsize, 0);
 }
