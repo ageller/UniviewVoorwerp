@@ -15,4 +15,8 @@ Thumbs.db
 __pycache__
 *.pyc
 
-
+# model files #
+##################
+*.obj
+*.mb
+*.mtl
