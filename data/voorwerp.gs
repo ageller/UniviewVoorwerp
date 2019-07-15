@@ -60,10 +60,10 @@ void main()
 	color = vec3(gl_in[1].gl_Position.x, gl_in[1].gl_Position.y, gl_in[1].gl_Position.z);
 
 
-	vec4 pos = vec4(gl_in[0].gl_Position.x*userScale + voorwerpOffset.x, gl_in[0].gl_Position.y*userScale + voorwerpOffset.y, gl_in[0].gl_Position.z*userScale + voorwerpOffset.z, 1.);
-	mat3 rotX= rotationMatrix(vec3(1,0,0), userRotationX);
-	mat3 rotY= rotationMatrix(vec3(0,1,0), userRotationY);
-	mat3 rotZ= rotationMatrix(vec3(0,0,1), userRotationZ);
-	drawSprite(rotX*rotY*rotZ*pos, userPsize, 0);
+	vec3 pos = vec3(gl_in[0].gl_Position.x*userScale + voorwerpOffset.x, gl_in[0].gl_Position.y*userScale + voorwerpOffset.y, gl_in[0].gl_Position.z*userScale + voorwerpOffset.z);
+	mat3 rotX = rotationMatrix(vec3(1,0,0), userRotationX);
+	mat3 rotY = rotationMatrix(vec3(0,1,0), userRotationY);
+	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ);
+	drawSprite(vec4(rotX*rotY*rotZ*pos, 1.), userPsize, 0);
 
 }
