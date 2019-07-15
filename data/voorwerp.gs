@@ -11,6 +11,7 @@ uniform float uv_simulationtimeSeconds;
 
 uniform float userPsize;
 uniform float userScale;
+uniform float userRotation;
 uniform vec3 voorwerpOffset;
 
 out vec2 texcoord;
@@ -55,8 +56,11 @@ void main()
 {
 
 	color = vec3(gl_in[1].gl_Position.x, gl_in[1].gl_Position.y, gl_in[1].gl_Position.z);
-	
+
+
 	vec4 pos = vec4(gl_in[0].gl_Position.x*userScale + voorwerpOffset.x, gl_in[0].gl_Position.y*userScale + voorwerpOffset.y, gl_in[0].gl_Position.z*userScale + voorwerpOffset.z, 1.);
-	drawSprite(pos, userPsize, 0);
+	vec3 axis = vec3(1,0,0);
+	mat3 rot = rotationMatrix(axis,userRotation);
+	drawSprite(rot*pos, userPsize, 0);
 
 }
