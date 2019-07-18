@@ -14,7 +14,7 @@ uniform float userScale;
 uniform float userRotationX;
 uniform float userRotationY;
 uniform float userRotationZ;
-uniform vec3 voorwerpOffset;
+
 
 out vec2 texcoord;
 out vec3 color;
@@ -60,7 +60,7 @@ void main()
 	color = vec3(gl_in[1].gl_Position.x/255., gl_in[1].gl_Position.y/255., gl_in[1].gl_Position.z/255.);
 
 
-	vec3 pos = vec3(gl_in[0].gl_Position.x*userScale + voorwerpOffset.x, gl_in[0].gl_Position.y*userScale + voorwerpOffset.y, gl_in[0].gl_Position.z*userScale + voorwerpOffset.z);
+	vec3 pos = vec3(gl_in[0].gl_Position.x*userScale, gl_in[0].gl_Position.y*userScale, gl_in[0].gl_Position.z*userScale);
 	mat3 rotX = rotationMatrix(vec3(1,0,0), userRotationX);
 	mat3 rotY = rotationMatrix(vec3(0,1,0), userRotationY);
 	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ);

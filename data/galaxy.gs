@@ -15,6 +15,9 @@ uniform float userRotationX;
 uniform float userRotationY;
 uniform float userRotationZ;
 uniform vec3 galaxyColor;
+uniform float voorwerpOffsetX;
+uniform float voorwerpOffsetY;
+uniform float voorwerpOffsetZ;
 
 out vec2 texcoord;
 out vec3 color;
@@ -60,8 +63,8 @@ void main()
 	color = galaxyColor;
 	
 	vec3 pos = vec3(gl_in[0].gl_Position.x*userScale, gl_in[0].gl_Position.y*userScale, gl_in[0].gl_Position.z*userScale);
-	mat3 rotX = rotationMatrix(vec3(1,0,0), userRotationX);
+	mat3 rotX = rotationMatrix(vec3(1,0,0), userRotationX + 3.141592653589793/2.); //to match plane of blazar model
 	mat3 rotY = rotationMatrix(vec3(0,1,0), userRotationY);
 	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ);
-	drawSprite(vec4(rotX*rotY*rotZ*pos, 1.), userPsize, 0);
+	drawSprite(vec4(vec3(rotX*rotY*rotZ*pos) + vec3(voorwerpOffsetX, voorwerpOffsetY, voorwerpOffsetZ), 1.), userPsize, 0);
 }
