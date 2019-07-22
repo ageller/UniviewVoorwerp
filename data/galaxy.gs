@@ -6,9 +6,6 @@ layout(triangle_strip, max_vertices = 4) out;
 uniform mat4 uv_modelViewProjectionMatrix;
 uniform mat4 uv_modelViewInverseMatrix;
 uniform float uv_fade;
-uniform int uv_simulationtimeDays;
-uniform float uv_simulationtimeSeconds;
-
 uniform float userPsize;
 uniform float userScale;
 uniform float userRotationX;
@@ -21,6 +18,12 @@ uniform float voorwerpOffsetZ;
 
 out vec2 texcoord;
 out vec3 color;
+
+uniform float uv_time;
+uniform int uv_simulationtimeDays;
+uniform float uv_simulationtimeSeconds;
+
+const float PI = 3.141592653589793;
 
 // axis should be normalized
 mat3 rotationMatrix(vec3 axis, float angle)
@@ -61,10 +64,16 @@ void main()
 {
 
 	color = galaxyColor;
+	//define the time 
+	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
+	float days = uv_simulationtimeDays + dayfract;
+	float r = length(gl_in[0].gl_Position.xyz);
+	//keplerian for now
+	float angle = mod(days/30., 2.*PI)/sqrt(r);
 	
 	vec3 pos = vec3(gl_in[0].gl_Position.x*userScale, gl_in[0].gl_Position.y*userScale, gl_in[0].gl_Position.z*userScale);
-	mat3 rotX = rotationMatrix(vec3(1,0,0), userRotationX + 3.141592653589793/2.); //to match plane of blazar model
+	mat3 rotX = rotationMatrix(vec3(1,0,0), userRotationX + PI/2.); //to match plane of blazar model
 	mat3 rotY = rotationMatrix(vec3(0,1,0), userRotationY);
-	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ);
+	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ + angle);
 	drawSprite(vec4(vec3(rotX*rotY*rotZ*pos) + vec3(voorwerpOffsetX, voorwerpOffsetY, voorwerpOffsetZ), 1.), userPsize, 0);
 }

@@ -92,7 +92,7 @@ void main(void)
 
 	float dist = abs(texcoord.y)/80. - tn;
 	
-	FragColor.a *= clamp(1. - dist, 0, 1.);
+	FragColor.a *= clamp(1. - dist, 0.01, 1.);
 	FragColor.a *= jetAlpha;
 
 	
