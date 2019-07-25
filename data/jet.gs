@@ -32,6 +32,7 @@ uniform float userRotationZ;
 uniform float jetScale;
 uniform float jetMin;
 uniform float jetMax;
+
 out vec2 texcoord;
 
 const float PI = 3.141592653589793;
@@ -63,7 +64,7 @@ void main()
 
 		vec3 pos = vec3(gl_in[i].gl_Position.x, gl_in[i].gl_Position.y, gl_in[i].gl_Position.z);
 		pos.y *= jetScale;
-		if (abs(pos.y) >= jetMin && abs(pos.y) <= jetMax){
+		//if (abs(pos.y) >= jetMin && abs(pos.y) <= jetMax){
 			gl_Position =  uv_modelViewProjectionMatrix *vec4(vec3(rotX*rotY*rotZ*pos + offset), gl_in[i].gl_Position.w);
 			
 			texcoord = gl_in[i].gl_Position.xy;
@@ -74,7 +75,7 @@ void main()
 			Normal = normal[i];
 			EyeVec = eyeVec[i];
 			EmitVertex();
-		}
+		//}
 	}
 
 

@@ -16,6 +16,9 @@ uniform vec3 uv_emissiveMtrl;
 uniform float uv_opacityMtrl;
 
 uniform float jetAlpha;
+uniform float jetScale;
+uniform float jetMin;
+uniform float jetMax;
 
 const float PI = 3.141592653589793;
 
@@ -94,6 +97,10 @@ void main(void)
 	
 	FragColor.a *= clamp(1. - dist, 0.01, 1.);
 	FragColor.a *= jetAlpha;
+	
+	float posY = abs(texcoord.y)*jetScale;
+	if (posY < jetMin || posY > jetMax) FragColor.a = 0.;
+
 
 	
 
