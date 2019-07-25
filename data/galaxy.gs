@@ -62,14 +62,13 @@ void drawSprite(vec4 position, float radius, float rotation)
 
 void main()
 {
-
 	color = galaxyColor;
 	//define the time 
 	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
 	float days = uv_simulationtimeDays + dayfract;
 	float r = length(gl_in[0].gl_Position.xyz);
 	//keplerian for now
-	float angle = mod(days/30., 2.*PI)/sqrt(r);
+	float angle = mod(days/30., 2.*PI)/r;
 	
 	vec3 pos = vec3(gl_in[0].gl_Position.x*userScale, gl_in[0].gl_Position.y*userScale, gl_in[0].gl_Position.z*userScale);
 	mat3 rotX = rotationMatrix(vec3(1,0,0), userRotationX + PI/2.); //to match plane of blazar model

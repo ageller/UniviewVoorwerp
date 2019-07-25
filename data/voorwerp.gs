@@ -17,9 +17,15 @@ uniform float userRotationX;
 uniform float userRotationY;
 uniform float userRotationZ;
 
+uniform float voorwerpOffsetX;
+uniform float voorwerpOffsetY;
+uniform float voorwerpOffsetZ;
+uniform float jetMin;
+uniform float jetMax;
 
 out vec2 texcoord;
 out vec3 color;
+out float onOff;
 
 // axis should be normalized
 mat3 rotationMatrix(vec3 axis, float angle)
@@ -140,6 +146,7 @@ void main()
 	mat3 rotY = rotationMatrix(vec3(0,1,0), userRotationY);
 	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ);
 	
+	
 	//define the time 
 	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
 	float days = uv_simulationtimeDays + dayfract;
@@ -156,7 +163,13 @@ void main()
 	float nFac = 0.1*r*r;
 	
 	pos += vec3(nX, nY, nZ)*nFac;
+	vec3 posR = rotX*rotY*rotZ*pos;
 	
-	drawSprite(vec4(rotX*rotY*rotZ*pos, 1.), userPsize, 0);
+	//check if the jet reached it
+	float loc = length(vec3(voorwerpOffsetX, voorwerpOffsetY, voorwerpOffsetZ) - posR);  //not sure why this is a minus sign...
+	onOff = 0.;
+	if (loc >= jetMin && loc <= jetMax) drawSprite(vec4(posR, 1.), userPsize, 0);
+	
+	
 
 }

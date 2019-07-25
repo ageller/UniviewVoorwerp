@@ -29,7 +29,9 @@ uniform float voorwerpOffsetZ;
 uniform float userRotationX;
 uniform float userRotationY;
 uniform float userRotationZ;
-uniform float jetLength;
+uniform float jetScale;
+uniform float jetMin;
+uniform float jetMax;
 out vec2 texcoord;
 
 const float PI = 3.141592653589793;
@@ -60,17 +62,19 @@ void main()
 	for (int i=0;i<3;i++) {
 
 		vec3 pos = vec3(gl_in[i].gl_Position.x, gl_in[i].gl_Position.y, gl_in[i].gl_Position.z);
-		pos.y *= jetLength;
-		gl_Position =  uv_modelViewProjectionMatrix *vec4(vec3(rotX*rotY*rotZ*pos + offset), gl_in[i].gl_Position.w);
-		
-		texcoord = gl_in[i].gl_Position.xy;
-		
-		LightDir1 = lightDir1[i];
-		LightDir2 = lightDir2[i];
+		pos.y *= jetScale;
+		if (abs(pos.y) >= jetMin && abs(pos.y) <= jetMax){
+			gl_Position =  uv_modelViewProjectionMatrix *vec4(vec3(rotX*rotY*rotZ*pos + offset), gl_in[i].gl_Position.w);
+			
+			texcoord = gl_in[i].gl_Position.xy;
+			
+			LightDir1 = lightDir1[i];
+			LightDir2 = lightDir2[i];
 
-		Normal = normal[i];
-		EyeVec = eyeVec[i];
-		EmitVertex();
+			Normal = normal[i];
+			EyeVec = eyeVec[i];
+			EmitVertex();
+		}
 	}
 
 
