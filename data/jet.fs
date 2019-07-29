@@ -19,6 +19,7 @@ uniform float jetAlpha;
 uniform float jetScale;
 uniform float jetMin;
 uniform float jetMax;
+uniform float jetSpeed;
 
 const float PI = 3.141592653589793;
 
@@ -86,16 +87,14 @@ void main(void)
 	//define the time 
 	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
 	float days = uv_simulationtimeDays + dayfract;
-	float angle = mod(days/10., 2.*PI);
-
 
 	//add some noisy motion along the jet y direction
-	float t = days*1. - abs(texcoord.y);
-	float tn = noise(vec3(1.,1., t), 2, 3., 0.7, 0)/4.;
+	float t = days*jetSpeed - abs(texcoord.y);
+	float tn = noise(vec3(1., 1., t), 2, 0.1, 0.005, 0);
 
-	float dist = abs(texcoord.y)/80. - tn;
+	float dist = abs(texcoord.y)/60. - tn;
 	
-	FragColor.a *= clamp(1. - dist, 0.01, 1.);
+	FragColor.a *= clamp(1.-dist, 0.1, 1.);
 	FragColor.a *= jetAlpha;
 	
 	float posY = abs(texcoord.y)*jetScale;

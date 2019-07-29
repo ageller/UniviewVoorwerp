@@ -1,5 +1,5 @@
 # UniviewVoorwerp
-Uniview module showing Hanny's Voorwerp
+Uniview module showing [Hanny's Voorwerp](https://academic.oup.com/mnras/article/399/1/129/1086654).
 
 This module also utilizes files from the [UniviewBlazar module](https://github.com/ageller/UniviewBlazar): A simple 3D model of a blazar in Maya and imported to Uniview (meant to be TXS 0506+056, which sent a neutrino observed as IceCube-170922A) for use in the Adler's 2018 Fall Kavli Lecture.
 
@@ -9,4 +9,5 @@ The 3D model is stored on Google Drive [here](https://drive.google.com/drive/fol
 * BlazarSolidModel_v2.2.mtl
 
 You will need to download both of these files and place them in the data directory.
+
 

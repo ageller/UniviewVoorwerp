@@ -29,6 +29,7 @@ uniform float voorwerpOffsetZ;
 uniform float userRotationX;
 uniform float userRotationY;
 uniform float userRotationZ;
+uniform float userScale;
 out vec2 texcoord;
 
 // axis should be normalized
@@ -53,7 +54,8 @@ void main()
 	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ);
 		
 	for (int i=0;i<3;i++) {
-		gl_Position =  uv_modelViewProjectionMatrix *vec4(vec3(rotX*rotY*rotZ*gl_in[i].gl_Position.xyz + offset), gl_in[i].gl_Position.w);
+
+		gl_Position =  uv_modelViewProjectionMatrix *vec4(vec3(rotX*rotY*rotZ*gl_in[i].gl_Position.xyz*userScale + offset), gl_in[i].gl_Position.w);
 		texcoord = gl_in[i].gl_Position.xz;
 		
 		LightDir1 = lightDir1[i];

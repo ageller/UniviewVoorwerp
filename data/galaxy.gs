@@ -62,6 +62,7 @@ void drawSprite(vec4 position, float radius, float rotation)
 
 void main()
 {
+	float bScale = 50.; //scale relative to the blazar model
 	color = galaxyColor;
 	//define the time 
 	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
@@ -70,9 +71,10 @@ void main()
 	//keplerian for now
 	float angle = mod(days/30., 2.*PI)/r;
 	
-	vec3 pos = vec3(gl_in[0].gl_Position.x*userScale, gl_in[0].gl_Position.y*userScale, gl_in[0].gl_Position.z*userScale);
+	//The blazar model has the yand z axes flipped
+	vec3 pos = gl_in[0].gl_Position.xyz*userScale*bScale;
 	mat3 rotX = rotationMatrix(vec3(1,0,0), userRotationX + PI/2.); //to match plane of blazar model
-	mat3 rotY = rotationMatrix(vec3(0,1,0), userRotationY);
-	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ + angle);
+	mat3 rotY = rotationMatrix(vec3(0,1,0), -userRotationZ + PI); //flip the orientation, based on how I have aligned the model and the real image
+	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationY + angle);
 	drawSprite(vec4(vec3(rotX*rotY*rotZ*pos) + vec3(voorwerpOffsetX, voorwerpOffsetY, voorwerpOffsetZ), 1.), userPsize, 0);
 }
