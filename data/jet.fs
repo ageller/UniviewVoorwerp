@@ -85,11 +85,12 @@ void main(void)
 	FragColor = vec4(1.);
 
 	//define the time 
-	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
-	float days = uv_simulationtimeDays + dayfract;
+	//float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
+	//float days = uv_simulationtimeDays + dayfract;
 
 	//add some noisy motion along the jet y direction
-	float t = days*jetSpeed - abs(texcoord.y);
+	//float t = days*jetSpeed - abs(texcoord.y);
+	float t = uv_simulationtimeSeconds*jetSpeed - abs(texcoord.y);
 	float tn = noise(vec3(1., 1., t), 2, 0.1, 0.005, 0);
 
 	float dist = abs(texcoord.y)/60. - tn;
@@ -98,6 +99,7 @@ void main(void)
 	FragColor.a *= jetAlpha;
 	
 	float posY = abs(texcoord.y)*jetScale;
+	FragColor.a *= pow(10./abs(texcoord.y), 3.);
 	if (posY < jetMin || posY > jetMax) FragColor.a = 0.;
 
 

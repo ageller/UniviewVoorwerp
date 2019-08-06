@@ -32,6 +32,8 @@ uniform float userRotationZ;
 uniform float userScale;
 out vec2 texcoord;
 
+const float PI = 3.141592653589793;
+
 // axis should be normalized
 mat3 rotationMatrix(vec3 axis, float angle)
 {
@@ -50,8 +52,8 @@ void main()
 	vec3 offset = vec3(voorwerpOffsetX, voorwerpOffsetY, voorwerpOffsetZ);
 		
 	mat3 rotX = rotationMatrix(vec3(1,0,0), userRotationX); 
-	mat3 rotY = rotationMatrix(vec3(0,1,0), userRotationY);
-	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ);
+	mat3 rotY = rotationMatrix(vec3(0,1,0), userRotationY); 
+	mat3 rotZ = rotationMatrix(vec3(0,0,1), userRotationZ); 
 		
 	for (int i=0;i<3;i++) {
 

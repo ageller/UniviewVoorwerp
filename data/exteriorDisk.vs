@@ -93,9 +93,10 @@ void main(void)
 {
 
 	//define the time 
-	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
-	float days = uv_simulationtimeDays + dayfract;
-	float angle = mod(days/30., 2.*PI);
+	//float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
+	//float days = uv_simulationtimeDays + dayfract;
+	//float angle = mod(days/30., 2.*PI);
+	float angle = PI - mod(uv_simulationtimeSeconds/10., 2.*PI); //to match the direction of the galaxy rotation
 
 	mat4 normalMatrix = transpose( uv_scene2ObjectMatrix );
 	

@@ -65,11 +65,12 @@ void main()
 	float bScale = 50.; //scale relative to the blazar model
 	color = galaxyColor;
 	//define the time 
-	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
-	float days = uv_simulationtimeDays + dayfract;
+	//float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
+	//float days = uv_simulationtimeDays + dayfract;
 	float r = length(gl_in[0].gl_Position.xyz);
 	//keplerian for now
-	float angle = mod(days/30., 2.*PI)/r;
+	//float angle = mod(days/30., 2.*PI)/r;
+	float angle = mod(uv_simulationtimeSeconds/30., 2.*PI)/r;
 	
 	//The blazar model has the yand z axes flipped
 	vec3 pos = gl_in[0].gl_Position.xyz*userScale*bScale;

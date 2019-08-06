@@ -148,15 +148,18 @@ void main()
 	
 	
 	//define the time 
-	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
-	float days = uv_simulationtimeDays + dayfract;
+	//float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
+	//float days = uv_simulationtimeDays + dayfract;
 
 	//add some noisy motion
 	float r = length(pos);
 	float dfac = 0.01;
-	vec3 pNormX = vec3(pos.x, r, days*dfac);
-	vec3 pNormY = vec3(pos.y, r, days*dfac);
-	vec3 pNormZ = vec3(pos.z, r, days*dfac);
+	//vec3 pNormX = vec3(pos.x, r, days*dfac);
+	//vec3 pNormY = vec3(pos.y, r, days*dfac);
+	//vec3 pNormZ = vec3(pos.z, r, days*dfac);
+	vec3 pNormX = vec3(pos.x, r, uv_simulationtimeSeconds*dfac);
+	vec3 pNormY = vec3(pos.y, r, uv_simulationtimeSeconds*dfac);
+	vec3 pNormZ = vec3(pos.z, r, uv_simulationtimeSeconds*dfac);
 	float nX = makeNoise(pNormX);
 	float nY = makeNoise(pNormY);
 	float nZ = makeNoise(pNormZ);

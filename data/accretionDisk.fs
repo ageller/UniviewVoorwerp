@@ -74,12 +74,13 @@ void main(void)
 	float newdist = round(dist/dfac)*dfac*10.;
 	
 	//define the time 
-	float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
-	float days = uv_simulationtimeDays + dayfract;
+	//float dayfract = uv_simulationtimeSeconds/(24.0*3600.0);
+	//float days = uv_simulationtimeDays + dayfract;
 
 	float semi = newdist;//pow(newdist, 2./3.);
 	float angle = atan(texcoord.y, texcoord.x) + PI;
-	float amin = mod(days/semi, 2.*PI);
+	//float amin = mod(days/semi, 2.*PI);
+	float amin = mod(uv_simulationtimeSeconds/semi, 2.*PI);
 	float amax = mod(amin + afac/semi, 2.*PI);
 	float adiff = clamp(1. - (angle - amin)/(afac/semi), 0.4, 1.);
 	//need to fix portion near angle of zero
