@@ -78,7 +78,7 @@ void main(void)
 	//float days = uv_simulationtimeDays + dayfract;
 
 	float semi = newdist;//pow(newdist, 2./3.);
-	float angle = atan(texcoord.y, texcoord.x) + PI;
+	float angle = PI - atan(texcoord.y, texcoord.x);
 	//float amin = mod(days/semi, 2.*PI);
 	float amin = mod(uv_simulationtimeSeconds/semi, 2.*PI);
 	float amax = mod(amin + afac/semi, 2.*PI);
