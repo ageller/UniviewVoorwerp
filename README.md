@@ -11,3 +11,5 @@ The 3D model is stored on Google Drive [here](https://drive.google.com/drive/fol
 You will need to download both of these files and place them in the data directory.
 
 
+[See this YouTube video for a demo.](https://youtu.be/6uLxSWNN0ac)
+
